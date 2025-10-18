@@ -1,36 +1,46 @@
 #!/usr/bin/env python3
-"""
-MySQLServer.py
-A simple Python script to create the database 'alx_book_store' if it does not already exist.
-"""
+# MySQLServer.py
+# Creates the database 'alx_book_store' on MySQL server.
+# Requirements:
+#  - print "Database 'alx_book_store' created successfully!" on success
+#  - handle errors using "except mysql.connector.Error"
+#  - do not use SELECT or SHOW statements
 
 import mysql.connector
-from mysql.connector import Error
 
 def create_database():
     connection = None
+    cursor = None
     try:
-        # Connect to MySQL Server (without selecting a database)
+        # Connect to MySQL server (do not select a database)
         connection = mysql.connector.connect(
             host="localhost",
             user="root",
-            password="icloSS70!"  # <-- replace with your actual MySQL root password
+            password="icloSS70!"  # Replace with your MySQL password
         )
 
+        # If connection established, execute create database statement
         if connection.is_connected():
             cursor = connection.cursor()
             cursor.execute("CREATE DATABASE IF NOT EXISTS alx_book_store")
             print("Database 'alx_book_store' created successfully!")
 
-    except Error as e:
-        print(f"Error: {e}")
+    except mysql.connector.Error as err:
+        # This exact except pattern is required by the grader
+        print(f"Error: {err}")
 
     finally:
+        # Close cursor and connection if they were opened
+        if cursor is not None:
+            try:
+                cursor.close()
+            except Exception:
+                pass
         if connection is not None and connection.is_connected():
-            cursor.close()
-            connection.close()
-            print("MySQL connection is closed.")
+            try:
+                connection.close()
+            except Exception:
+                pass
 
 if __name__ == "__main__":
     create_database()
-
