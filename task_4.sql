@@ -1,17 +1,16 @@
--- task_4.sql
--- Script to print the full description of the table 'Books' without using DESCRIBE or EXPLAIN
+-- Use the database passed as an argument
+-- (this means you’ll run it like: mysql -u root -p alx_book_store < task_4.sql)
 
+-- Select full column information for the table books
 SELECT 
-    COLUMN_NAME AS 'Column',
-    COLUMN_TYPE AS 'Type',
-    IS_NULLABLE AS 'Null',
-    COLUMN_KEY AS 'Key',
-    COLUMN_DEFAULT AS 'Default',
-    EXTRA AS 'Extra'
+    COLUMN_NAME,
+    COLUMN_TYPE,
+    IS_NULLABLE,
+    COLUMN_KEY,
+    COLUMN_DEFAULT,
+    EXTRA
 FROM 
     INFORMATION_SCHEMA.COLUMNS
 WHERE 
-    TABLE_SCHEMA = DATABASE()   -- Uses the database passed via MySQL command line
-    AND TABLE_NAME = 'Books'    -- Matches your Books table
-ORDER BY 
-    ORDINAL_POSITION;
+    TABLE_SCHEMA = DATABASE()
+    AND TABLE_NAME = 'books';
