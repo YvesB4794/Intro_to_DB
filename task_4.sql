@@ -1,5 +1,5 @@
 -- task_4.sql
--- Task 4: Print the full description of the table 'Books' without using DESCRIBE or EXPLAIN
+-- Script to print the full description of the table 'Books' without using DESCRIBE or EXPLAIN
 
 SELECT 
     COLUMN_NAME AS 'Column',
@@ -11,7 +11,7 @@ SELECT
 FROM 
     INFORMATION_SCHEMA.COLUMNS
 WHERE 
-    TABLE_SCHEMA = DATABASE()
-    AND TABLE_NAME = 'Books'
+    TABLE_SCHEMA = DATABASE()   -- Uses the database passed via MySQL command line
+    AND TABLE_NAME = 'Books'    -- Matches your Books table
 ORDER BY 
     ORDINAL_POSITION;
