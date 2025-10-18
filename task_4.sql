@@ -1,6 +1,5 @@
 -- task_4.sql
 -- Task 4: Print the full description of the table 'Books' without using DESCRIBE or EXPLAIN
--- Filters explicitly on the alx_book_store database
 
 SELECT 
     COLUMN_NAME AS 'Column',
@@ -12,7 +11,7 @@ SELECT
 FROM 
     INFORMATION_SCHEMA.COLUMNS
 WHERE 
-    TABLE_SCHEMA = 'alx_book_store'
+    TABLE_SCHEMA = DATABASE()
     AND TABLE_NAME = 'Books'
 ORDER BY 
     ORDINAL_POSITION;
